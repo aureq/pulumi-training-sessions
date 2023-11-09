@@ -1,2 +1,6 @@
 config:
   azure-native:location: AustraliaEast
+  pulumi-az-cs-training-session-2:apiKey:
+    secure: AAABAB+6YNB38Upx0Wf7vVxDSjmtNAGU+iRt+X1qg0q1TTD5Jk+GM0phPw==
+  pulumi-az-cs-training-session-2:stackOwner: Aurelien
+  pulumi-az-cs-training-session-2:subscriptionId: 123-123-123
