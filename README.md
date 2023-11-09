@@ -1,25 +1,49 @@
-# Pulumi Training Sessions 
+# Pulumi training using TypeScript (4th session)
 
-Welcome to the Pulumi Training Sessions Repository! This repository is designed to help you learn and practice your Pulumi skills with hands-on exercises and their corresponding solutions. Each training session is organized into two branches: an exercise branch and a solution branch.
+Exercises to learn how to use Pulumi (4th session)
 
-## Branch Structure
+## Introduction
 
-The branches follow a naming convention to help you easily identify the content:
+This exercise starts where we finished the previous session (a Virtual Network and a VM) but dive deeper on Pulumi reusability patterns at scale. You'll learn how to create your own Component Resource and use stack references along the way.
 
-- **Exercise Branches**: Each exercise branch contains the starting code and instructions for the exercises. Each branch will follow a structure like the following `azure-cs/session-2-exercise` where it is prefixed with the cloud provider and language.
-- **Solution Branches**: These branches include the completed code and detailed explanations of the solutions. An example would be `azure-cs/session-2-solution`
+For a better learning experience, you way want to start with your own code from the previous training session.
 
-### Navigating the Repository
+## Content
 
-To switch between the exercise and solution branches, you can use the following git commands:
+* Create a new stack and install the node modules (`npm install`)
+* Create 2 folders named `network` and `app`
 
-```sh
-# To switch to an exercise branch
-git checkout azure-cs/session-2-exercise
+### The `network` project
 
-# To switch to a solution branch
-git checkout azure-cs/session-2-solution
-```
+1. Switch to the [`network/`](./exercise/network/) folder, create a new stack and install the node modules (`npm install`)
+2. Deploy a fully functional virtual network as a component resource
+   * Ensure the component resource is easily portable
+3. Determine the necessary stack outputs for the `webserver` project to use
 
-## Additional Resources
-[Pulumi Docs](https://www.pulumi.com/docs/)
+### The `webserver` project
+
+4. Switch to the [`app`](./exercise/webserver/) folder, create a new stack and install the node modules (`npm install`)
+5. Use stack references to retrieve the necessary dependencies
+5. Use the `get*()` functions to retrieve existing resources
+6. Deploy a VM you can SSH into in the previously created subnet
+   * Use stack references
+   * Use Ubuntu 20.04 LTS (latest version)
+   * ensure you can SSH into each VM
+7. Create stack outputs for:
+   * the VMs hostname
+   * the username
+   * the password
+
+### Bonus/Challenges
+
+8. Use Pulumi runtime functions to determine the current stack name
+9. Your component resource doesn't rely on pulumi.Config()
+10. Your component resource args use strong typing
+
+### Resources
+
+* Pulumi [examples](https://github.com/pulumi/examples)
+
+### Answers
+
+You will find all the answers on the azure-ts/session-4-solution branch.
