@@ -1,0 +1,4 @@
+config:
+  azure:location: WestUS2
+  webserver:org: menfin
+  webserver:username: pulumi

@@ -1,0 +1,13 @@
+{
+    "name": "watrust",
+    "main": "index.ts",
+    "devDependencies": {
+        "@types/node": "^16"
+    },
+    "dependencies": {
+        "@pulumi/azure": "^5.0.0",
+        "@pulumi/pulumi": "^3.0.0",
+        "@types/netmask": "^1.0.30",
+        "netmask": "^2.0.2"
+    }
+}

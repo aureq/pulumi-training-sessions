@@ -1,0 +1,4 @@
+config:
+  azure:location: WestUS2
+  network:cidrBlock: 10.42.0.0/16
+  network:netmask: 255.255.240.0
