@@ -1,25 +1,39 @@
-# Pulumi Training Sessions 
+# Pulumi training using TypeScript (3rd session)
 
-Welcome to the Pulumi Training Sessions Repository! This repository is designed to help you learn and practice your Pulumi skills with hands-on exercises and their corresponding solutions. Each training session is organized into two branches: an exercise branch and a solution branch.
+Exercises to learn how to use Pulumi (3rd session)
 
-## Branch Structure
+## Introduction
 
-The branches follow a naming convention to help you easily identify the content:
+In this session, you will learn how to create a fully functional VirtualNetwork and a virtual machine. You'll also learn how to use 3rd party library to perform tasks more efficiently and in a reliable way. You'll have another opportunity to use string concatenation on `Output<T>`.
 
-- **Exercise Branches**: Each exercise branch contains the starting code and instructions for the exercises. Each branch will follow a structure like the following `azure-cs/session-2-exercise` where it is prefixed with the cloud provider and language.
-- **Solution Branches**: These branches include the completed code and detailed explanations of the solutions. An example would be `azure-cs/session-2-solution`
+## Content
 
-### Navigating the Repository
+1. Create a new stack and install the node modules (`npm install`)
+2. Create the following resources, and make sure they are all nested under the correct parent
+   * A Virtual Network (10.42.0.0/16)
+   * A public Subnet (/20)
+   * A public IP address
+   * A network interface
+   * The necessarity network security group and rule
+3. Create a virtual machine
+   * Use a small virtual machine to limit/reduce cost
+   * Using the most recent Ubuntu 20.04 LTS
+   * Generate a random password
+   * ensure you can SSH into it
+4. Create stack outputs for:
+   * The VM host name or IP address
+   * The random password
+   * A configuration admin user name for the VM
 
-To switch between the exercise and solution branches, you can use the following git commands:
+## Bonus/Challenges
 
-```sh
-# To switch to an exercise branch
-git checkout azure-cs/session-2-exercise
+5. Use a 3rd pary module to compute subnets CIDR
+6. Ensure the project can easily be configured (ie, no hardcoded values where possible)
 
-# To switch to a solution branch
-git checkout azure-cs/session-2-solution
-```
+## Resources
 
-## Additional Resources
-[Pulumi Docs](https://www.pulumi.com/docs/)
+* Pulumi [examples](https://github.com/pulumi/examples)
+
+## Answers
+
+You will find all the answers on the aws-ts/session-3-solution branch.
