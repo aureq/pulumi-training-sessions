@@ -1,0 +1,6 @@
+config:
+  aws:region: ap-southeast-2
+  exercise-3:availablityZone: ap-southeast-2a
+  exercise-3:cidrBlock: 10.42.0.0/16
+  exercise-3:netmask: 255.255.240.0
+  exercise-3:ownerEmail: will.e.coyote@acmecorp.com

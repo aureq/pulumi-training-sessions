@@ -1,25 +1,39 @@
-# Pulumi Training Sessions 
+# Pulumi training using TypeScript (3rd session)
+Exercises to learn how to use Pulumi (3rd session)
 
-Welcome to the Pulumi Training Sessions Repository! This repository is designed to help you learn and practice your Pulumi skills with hands-on exercises and their corresponding solutions. Each training session is organized into two branches: an exercise branch and a solution branch.
+## Introduction ##
 
-## Branch Structure
+In this session, you will learn how to create a ully functional VPC and a virtula machine. You'll also learn how to use 3rd party library to perform tasks more efficiently and in a reliable way. You'll have another opportunity to use string concatenation on Output<T>.
 
-The branches follow a naming convention to help you easily identify the content:
+## Content ##
 
-- **Exercise Branches**: Each exercise branch contains the starting code and instructions for the exercises. Each branch will follow a structure like the following `azure-cs/session-2-exercise` where it is prefixed with the cloud provider and language.
-- **Solution Branches**: These branches include the completed code and detailed explanations of the solutions. An example would be `azure-cs/session-2-solution`
+1. Create a new stack and install the node modules (`npm install`)
+2. Create the following resources, and make sure they are all nested under the correct parent
+   * A VPC (10.42.0.0/16)
+   * An Internet Gateway
+   * A public Subnet (/20)
+   * A security group and allow port 22 inbound
+   * A route table
+   * Associate the route table and the subnet together
+3. Create a virtual machine
+   * using a free-tier instance type (reminder only - so your account doesn't get charged)
+   * using the most recent Debian 11 AMI
+   * ensure you can SSH into it
+4. Create stack outputs for:
+   * the VM host name
+   * the SSH private key as secret
+   * the SSH public key
 
-### Navigating the Repository
+### Bonus/Challenges ###
 
-To switch between the exercise and solution branches, you can use the following git commands:
+5. Use a 3rd pary module to compute subnets CIDR
+6. Generate a SSH key pair (ed25519) and pass it to the VM using user-data, verify you can SSH the VM (as 'admin')
+7. Ensure the project can easily be configured (ie, no hardcoded values where possible)
+8. Resources are tagged so it's easy to create an AWS Budget for cost tracking purpose
 
-```sh
-# To switch to an exercise branch
-git checkout azure-cs/session-2-exercise
+### Resources ###
 
-# To switch to a solution branch
-git checkout azure-cs/session-2-solution
-```
+* Pulumi [examples](https://github.com/pulumi/examples)
 
-## Additional Resources
-[Pulumi Docs](https://www.pulumi.com/docs/)
+## Answers ##
+You will find all the answers on the aws-ts/session-3-solution branch.
