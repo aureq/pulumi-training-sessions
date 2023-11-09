@@ -23,44 +23,64 @@ export = async () => {
         instanceTenancy: "default",
         enableDnsHostnames: true,
         enableDnsSupport: true,
-        tags:                                                       /* FIXME */
+        tags: {
+            owner: ownerEmail,
+        }
     });
 
     // TODO: 2. Create Internet Gateway
     const igw = new aws.ec2.InternetGateway(`${baseName}-igw`, {
-        vpcId: ,                                                    /* FIXME */
-        tags:                                                       /* FIXME */
+        vpcId: vpc.id,
+        tags: {
+            // TODO: 8. Resource tagged
+            owner: ownerEmail,
+        }
     },{
         // TODO: 2. Resource has a parent
-        parent:                                                     /* FIXME */
+        parent: vpc
     });
 
     // TODO: 2. Create route table
-    const routeTable = new aws.ec2.RouteTable(`${baseName}-rt`, {   /* FIXME */
+    const routeTable = new aws.ec2.RouteTable(`${baseName}-rt`, {
+        vpcId: vpc.id,
         routes: [
             {
                 cidrBlock: '0.0.0.0/0',
                 gatewayId: igw.id
             }
         ],
+        tags: {
+            // TODO: 8. Resource tagged
+            owner: ownerEmail,
+        }
     }, {
         // TODO: 2. Resource has a parent
+        parent: vpc
     });
 
     // TODO: 5. Use a 3rd pary module to compute subnets CIDR
     const subnetCidrBlock = `${subnetCidr.base}/${subnetCidr.bitmask}`;
 
     // TODO: 2. Create public subnet
-    const pubSubnet = new aws.ec2.Subnet(`${baseName}-subnet`, {    /* FIXME */
+    const pubSubnet = new aws.ec2.Subnet(`${baseName}-subnet`, {
+        vpcId: vpc.id,
+        cidrBlock: subnetCidrBlock,
         assignIpv6AddressOnCreation: false,
         mapPublicIpOnLaunch: true,
+        availabilityZone: availabilityZone,
+        tags: {
+            // TODO: 8. Resource tagged
+            owner: ownerEmail,
+        }
     }, {
         // TODO: 2. Resource has a parent
+        parent: vpc
     });
 
     // TODO: 2. Create route table association
     const routeTableAssoc = new aws.ec2.RouteTableAssociation(`${baseName}-public-rt-assoc-${availabilityZone}`, {
-                                                                    /* FIXME */
+        routeTableId: routeTable.id,
+        subnetId: pubSubnet.id,
     }, {
         // TODO: 2. Resource has a parent
         parent: routeTable
@@ -68,7 +88,7 @@ export = async () => {
 
     // TODO: 2. Create security group
     const securityGroup = new aws.ec2.SecurityGroup(`${baseName}-sg`, {
-        vpcId: ,                                                    /* FIXME */
+        vpcId: vpc.id,
         description: 'Allow SSH inbound traffic',
         ingress: [{
             cidrBlocks: ['0.0.0.0/0'],
@@ -83,13 +103,21 @@ export = async () => {
             toPort: 0,
             protocol: '-1'
         }],
+        tags: {
+            // TODO: 8. Resource tagged
+            owner: ownerEmail,
+        },
     }, {
         // TODO: 2. Resource has a parent
+        parent: vpc,
         deleteBeforeReplace: true
     });
 
     // TODO: 3. Create a SSH key
-    const sshPrivateKey = /* FIXME: Use `new tls.PrivateKey` */
+    const sshPrivateKey = new tls.PrivateKey(`${baseName}-private-key`, {
+        // TODO: 6. Generate a SSH key pair (ed25519)
+        algorithm: "ED25519"
+    });
 
     // TODO: 3. Retrieve the most recent Debian 11 AMI for amd64
     const debianAmi = aws.ec2.getAmi({
@@ -116,21 +144,24 @@ users:
     const vm = new aws.ec2.Instance(`${baseName}-vm`, {
         ami: (await debianAmi).imageId,
         instanceType: "t3.micro",
-        subnetId: ,                                                 /* FIXME */
-        vpcSecurityGroupIds: [ ],                                   /* FIXME */
+        subnetId: pubSubnet.id,
+        vpcSecurityGroupIds: [securityGroup.id],
         userDataReplaceOnChange: true,
         // TODO: 6. pass it to the VM using user-data
-        userData: ,                                                 /* FIXME */
-        tags: ,                                                     /* FIXME */
+        userData: userData,
+        tags: {
+            // TODO: 8. Resource tagged
+            owner: ownerEmail,
+        },
     }, {
-                                                                    /* FIXME */
+        parent: vpc
     });
 
-    return {                                                        /* FIXME */
-        vpcId: ,
-        sshPrivKey: ,
-        sshPubKey: ,
-        sshKeyFingerprint: ,
-        hostname:
+    return {
+        vpcId: vpc.id,
+        sshPrivKey: sshPrivateKey.privateKeyOpenssh,
+        sshPubKey: sshPrivateKey.publicKeyOpenssh,
+        sshKeyFingerprint: sshPrivateKey.publicKeyFingerprintSha256,
+        hostname: vm.publicDns
     }
 }
