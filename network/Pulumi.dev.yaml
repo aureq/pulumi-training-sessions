@@ -1,0 +1,16 @@
+config:
+  network:availabilityZones:
+  - ap-southeast-1a
+  - ap-southeast-2b
+  network:cidrBlocks:
+  - 10.41.0.0/16
+  - 10.42.0.0/16
+  network:netmasks:
+  - 255.255.240.0
+  - 255.255.240.0
+  network:ownerEmail: will.e.coyote@acmecorp.com
+  network:regions:
+  - ap-southeast-1
+  - ap-southeast-2
+  pulumi:disable-default-providers:
+  - “*”
