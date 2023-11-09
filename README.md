@@ -1,25 +1,40 @@
-# Pulumi Training Sessions 
+# Pulumi training using TypeScript (2nd session)
 
-Welcome to the Pulumi Training Sessions Repository! This repository is designed to help you learn and practice your Pulumi skills with hands-on exercises and their corresponding solutions. Each training session is organized into two branches: an exercise branch and a solution branch.
+Exercises to learn how to use Pulumi (2nd session)
 
-## Branch Structure
+## Introduction
 
-The branches follow a naming convention to help you easily identify the content:
+The series of tasks below will help you learn how to use Pulumi configuration and secrets. You will also learn how to do basic operations such as string concatenation on `Output<T>`.
 
-- **Exercise Branches**: Each exercise branch contains the starting code and instructions for the exercises. Each branch will follow a structure like the following `azure-cs/session-2-exercise` where it is prefixed with the cloud provider and language.
-- **Solution Branches**: These branches include the completed code and detailed explanations of the solutions. An example would be `azure-cs/session-2-solution`
+## Content
 
-### Navigating the Repository
+1. Create a new stack and install the node modules (`npm install`)
+2. Create a new configuration entry named `ownerName`
+3. Create a new configuration entry named `subscriptionId`
+4. Create a new secret entry named `apiKey`
+5. Generate a new password using the [Random](https://www.pulumi.com/registry/packages/random/) provider
+   - At least 20 charaters long
+   - Must contain special characters
+6. Generate a random pet name using the [Random](https://www.pulumi.com/registry/packages/random/) provider
+7. Concatenate the `ownerName` stack config value with the random pet name (format: `owner-pet`) using `pulumi.interpolate` And display the result on the console.
+8. Use pulumi.all() to create a welcome message "`Hello dear <ownerName>, this is your pet <petName>.`"
+9.  Create stack outputs for:
+   - the random password generated in 5
+   - the stack pet name from step 6
+   - the concatenated owner name and pet name from step 7
+   - the `apiKey` set in step 1 as `apiKey`
+   - the plain text value of `apiKey` set in step 1 as `insecureApiKey`
+   - the welcome message
+10. In one command, set the stack tag `pet` as the randomly generated pet name
 
-To switch between the exercise and solution branches, you can use the following git commands:
+### Bonus/Challenges
 
-```sh
-# To switch to an exercise branch
-git checkout azure-cs/session-2-exercise
+11. Set a stack README for your stack
 
-# To switch to a solution branch
-git checkout azure-cs/session-2-solution
-```
+### Resources
 
-## Additional Resources
-[Pulumi Docs](https://www.pulumi.com/docs/)
+- Pulumi [examples](https://github.com/pulumi/examples)
+
+## Answers
+
+You will find all the answers on the aws-cs/session-2-solution branch.
