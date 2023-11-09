@@ -1,25 +1,45 @@
-# Pulumi Training Sessions 
+# Pulumi training using C# (4th session)
 
-Welcome to the Pulumi Training Sessions Repository! This repository is designed to help you learn and practice your Pulumi skills with hands-on exercises and their corresponding solutions. Each training session is organized into two branches: an exercise branch and a solution branch.
+Exercises to learn how to use Pulumi (4th session)
 
-## Branch Structure
+## Introduction
 
-The branches follow a naming convention to help you easily identify the content:
+This exercise starts where we finished the previous session (a Virtual Network and a VM) but dives deeper on Pulumi reusability patterns at scale. You'll learn how to create your own Component Resource and use stack references along the way.
 
-- **Exercise Branches**: Each exercise branch contains the starting code and instructions for the exercises. Each branch will follow a structure like the following `azure-cs/session-2-exercise` where it is prefixed with the cloud provider and language.
-- **Solution Branches**: These branches include the completed code and detailed explanations of the solutions. An example would be `azure-cs/session-2-solution`
+For a better learning experience, you way want to start with your own code from the previous training session.
 
-### Navigating the Repository
+## Content
 
-To switch between the exercise and solution branches, you can use the following git commands:
+### The `network` project
 
-```sh
-# To switch to an exercise branch
-git checkout azure-cs/session-2-exercise
+1. Switch to the [`network/`](./network/) folder and create a new stack (`pulumi new azure-csharp`)
+2. Deploy a fully functional virtual network as a component resource
+   * Ensure the component resource is easily portable
+3. Determine the necessary stack outputs for the `webserver` project to use
 
-# To switch to a solution branch
-git checkout azure-cs/session-2-solution
-```
+### The `webserver` project
 
-## Additional Resources
-[Pulumi Docs](https://www.pulumi.com/docs/)
+4. Switch to the [`webserver/`](./webserver/) folder and create a new stack (`pulumi new azure-csharp`)
+5. Use stack references to retrieve the necessary dependencies
+6. Use the `Get*()` functions to retrieve existing resources
+7. Deploy a VM you can SSH into in the previously created subnet (Component Resource)
+   * Use stack references
+   * Use Ubuntu 20.04 LTS (latest version)
+   * ensure you can SSH into each VM
+8. Create stack outputs for:
+   * the VMs hostname
+   * the username
+   * the password
+
+### Bonus/Challenges
+
+9. Use Pulumi runtime functions to determine the current stack name
+10. Your component resource doesn't rely on pulumi.Config()
+
+### Resources
+
+* Pulumi [examples](https://github.com/pulumi/examples)
+
+### Answers
+
+You will find all the answers on the azure-cs/session-4-solution branch.
