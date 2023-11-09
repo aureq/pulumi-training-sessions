@@ -1,25 +1,57 @@
-# Pulumi Training Sessions 
+# Pulumi training using TypeScript (4th session)
+Exercises to learn how to use Pulumi (4th session)
 
-Welcome to the Pulumi Training Sessions Repository! This repository is designed to help you learn and practice your Pulumi skills with hands-on exercises and their corresponding solutions. Each training session is organized into two branches: an exercise branch and a solution branch.
+## Introduction ##
 
-## Branch Structure
+This exercise starts where we finished the previous session (a VPC and a VM) but dive deeper on Pulumi reusability patterns at scale. You'll learn how to create your own Component Resource, use your own resource providers across different regions, apply some tags and use stack references along the way.
 
-The branches follow a naming convention to help you easily identify the content:
+For a better learning experience, you way want to start with your wn code from the previous training session.
 
-- **Exercise Branches**: Each exercise branch contains the starting code and instructions for the exercises. Each branch will follow a structure like the following `azure-cs/session-2-exercise` where it is prefixed with the cloud provider and language.
-- **Solution Branches**: These branches include the completed code and detailed explanations of the solutions. An example would be `azure-cs/session-2-solution`
+## Content ##
 
-### Navigating the Repository
+1. Create a new stack and install the node modules (`npm install`)
+1. Create 2 folders named `network` and `app`
 
-To switch between the exercise and solution branches, you can use the following git commands:
+### The `network` project ###
 
-```sh
-# To switch to an exercise branch
-git checkout azure-cs/session-2-exercise
+1. Switch to the `network` folder, create a new stack and install the node modules (`npm install`)
+2. Disable all [default providers](https://www.pulumi.com/blog/disable-default-providers/)
+3. Deploy a fully functional VPC in 2 or more configurable AWS regions (Component Resource)
+   * Leverage `pulumi config set`
+4. Programmatically apply tags to your resources so it's easy to create an AWS Budget later on
+5. Determine the necessary stack outputs for the `app` project to use:
 
-# To switch to a solution branch
-git checkout azure-cs/session-2-solution
-```
 
-## Additional Resources
-[Pulumi Docs](https://www.pulumi.com/docs/)
+### The `app` project ###
+
+For this part of the exercise, using Component Resource is _NOT_ required.
+
+1. Switch to the `app` folder
+2. Disable all default providers
+3. Use stack references and programmatic provider declaration throughout
+4. Deploy a VM you can SSH into in the previously created subnets
+   * Use stack references
+   * using a free-tier instance type (reminder only - so your account doesn't get charged)
+   * using the most recent Debian 11 AMI for the region
+   * ensure you can SSH into each VM
+5. Create stack outputs for:
+   * the VMs hostname
+   * the SSH private key as secret
+   * the SSH public key
+6. Set tags on your VMs but apply the tags on 1 VM at a time when running `pulumi up` (no code or config changes between updates)
+   1. Requires inspecting the stack state file
+   2. Requires a specific `pulumi up` option (see --help)
+
+### Bonus/Challenges ###
+
+10. Use Pulumi runtime functions to determine the current stack name
+11. Your component resource doesn't rely on pulumi.Config()
+12. Your component resource args use strong typing
+
+### Resources ###
+
+* Pulumi [examples](https://github.com/pulumi/examples)
+* [taggable.ts](https://github.com/joeduffy/aws-tags-example/blob/master/autotag-ts/taggable.ts) and [autotag.ts](https://github.com/joeduffy/aws-tags-example/blob/master/autotag-ts/autotag.ts)
+
+### Answers ###
+You will find all the answers on the azure-cs/session-4-solution branch.
