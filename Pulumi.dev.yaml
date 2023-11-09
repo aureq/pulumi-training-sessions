@@ -1,0 +1,5 @@
+config:
+  exercise-2:apiKey:
+    secure: AAABAGcsEHsEqwZvYYzj4WO9HWtXZs3hhsy5NDkX3BhCuv7sug5/UWagklzaGSDBeYZXw21PLHKMVRBiB4pdrynlmBHc8fsHQSE/uG+dVOacUXqL7fX6BAai7V2Yv8ze3ZwIo8Sm30Q=
+  exercise-2:stackOwner: aureq
+  exercise-2:subscriptionId: 123-123-123

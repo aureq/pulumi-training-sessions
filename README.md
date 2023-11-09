@@ -1,40 +1,15 @@
 # Pulumi training using TypeScript (2nd session)
+Answers to the 2nd training session
 
-Exercises to learn how to use Pulumi (2nd session)
+## Answers ##
 
-## Introduction
-
-The series of tasks below will help you learn how to use Pulumi configuration and secrets. You will also learn how to do basic operations such as string concatenation on `Output<T>`.
-
-## Content
-
-1. Create a new stack and install the node modules (`npm install`)
-2. Create a new configuration entry named `ownerName`
-3. Create a new configuration entry named `subscriptionId`
-4. Create a new secret entry named `apiKey`
-5. Generate a new password using the [Random](https://www.pulumi.com/registry/packages/random/) provider
-   - At least 20 charaters long
-   - Must contain special characters
-6. Generate a random pet name using the [Random](https://www.pulumi.com/registry/packages/random/) provider
-7. Concatenate the `ownerName` stack config value with the random pet name (format: `owner-pet`) using `pulumi.interpolate` And display the result on the console.
-8. Use pulumi.all() to create a welcome message "`Hello dear <ownerName>, this is your pet <petName>.`"
-9.  Create stack outputs for:
-   - the random password generated in 5
-   - the stack pet name from step 6
-   - the concatenated owner name and pet name from step 7
-   - the `apiKey` set in step 1 as `apiKey`
-   - the plain text value of `apiKey` set in step 1 as `insecureApiKey`
-   - the welcome message
-10. In one command, set the stack tag `pet` as the randomly generated pet name
-
-### Bonus/Challenges
-
-11. Set a stack README for your stack
-
-### Resources
-
-- Pulumi [examples](https://github.com/pulumi/examples)
-
-## Answers
-
-You will find all the answers on the aws-ts/session-2-solution branch.
+1. `pulumi stack init loginName/dev`
+2. `pulumi config set stackOwner Aurelien`
+3. `pulumi config set subscriptionId 123-123-123`
+4. `pulumi config set apiKey --secret`
+5. See [index.ts](index.ts)
+6. See [index.ts](index.ts)
+7. See [index.ts](index.ts)
+8. See [index.ts](index.ts)
+9. `pulumi stack tag set pet $(pulumi stack output stackPet)`
+10. See [index.ts](index.ts)
