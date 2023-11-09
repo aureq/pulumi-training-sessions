@@ -7,6 +7,8 @@
     "dependencies": {
         "@pulumi/azure": "^5.0.0",
         "@pulumi/pulumi": "^3.0.0",
-        "@pulumi/random": "^4.8.2"
+        "@pulumi/random": "^4.8.2",
+        "@types/netmask": "^1.0.30",
+        "netmask": "^2.0.2"
     }
 }

@@ -1,2 +1,5 @@
 config:
   azure:location: WestUS2
+  webserver:cidrBlock: 10.42.0.0/16
+  webserver:netmask: 255.255.240.0
+  webserver:username: pulumi
